@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsString, MinLength } from 'class-validator';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 import { Transform } from 'class-transformer';
 import { hashSync } from 'bcryptjs';
 
@@ -27,6 +33,7 @@ export class CreateClientDto {
   })
   password: string;
 
-  @IsString()
+  @IsBoolean()
+  @IsOptional()
   isAdmin: boolean;
 }

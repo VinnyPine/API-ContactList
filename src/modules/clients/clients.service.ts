@@ -2,6 +2,7 @@ import {
   Injectable,
   ConflictException,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
@@ -22,11 +23,18 @@ export class ClientsService {
     return this.clientRepository.create(createClientDto);
   }
 
-  findAll() {
+  findAll(req: any) {
+    if (!req.user.admin) {
+      throw new UnauthorizedException('user not authorized');
+    }
+
     return this.clientRepository.findAll();
   }
 
-  findOne(id: string) {
+  findOne(id: string, req: any) {
+    if (!req.user.admin) {
+      throw new UnauthorizedException('user not authorized');
+    }
     const findClient = this.clientRepository.findOne(id);
     if (!findClient) {
       throw new NotFoundException('user not found');
@@ -39,7 +47,10 @@ export class ClientsService {
     return client;
   }
 
-  update(id: string, updateClientDto: UpdateClientDto) {
+  update(id: string, updateClientDto: UpdateClientDto, req: any) {
+    if (!req.user.admin && req.user.id !== id) {
+      throw new UnauthorizedException('user not authorized');
+    }
     const findUser = this.clientRepository.findOne(id);
     if (!findUser) {
       throw new NotFoundException('user not found');
@@ -47,7 +58,10 @@ export class ClientsService {
     return this.clientRepository.update(id, updateClientDto);
   }
 
-  remove(id: string) {
+  remove(id: string, req: any) {
+    if (!req.user.admin && req.user.id !== id) {
+      throw new UnauthorizedException('user not authorized');
+    }
     const findUser = this.clientRepository.findOne(id);
     if (!findUser) {
       throw new NotFoundException('user not found');

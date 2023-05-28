@@ -11,6 +11,9 @@ export class Client {
   @Exclude()
   password: string;
 
+  readonly isAdmin: boolean;
+  readonly createdAt: Date;
+
   constructor(data: Partial<Client>) {
     this.id = randomUUID();
 

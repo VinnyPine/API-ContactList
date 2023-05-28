@@ -17,6 +17,8 @@ export class ClientsPrismaRepository implements ClientsRepository {
       data: { ...client },
     });
 
+    console.log(newClient);
+
     return plainToInstance(Client, newClient);
   }
 

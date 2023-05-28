@@ -15,5 +15,6 @@ import { ClientsPrismaRepository } from './repositories/prisma/client-prisma.rep
       useClass: ClientsPrismaRepository,
     },
   ],
+  exports: [ClientsService],
 })
 export class ClientsModule {}

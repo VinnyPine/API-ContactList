@@ -13,11 +13,9 @@ export class ClientsPrismaRepository implements ClientsRepository {
   async create(data: CreateClientDto): Promise<Client> {
     const client = new Client({ ...data });
 
-    const newClient: Client = await this.prisma.client.create({
+    const newClient = await this.prisma.client.create({
       data: { ...client },
     });
-
-    console.log(newClient);
 
     return plainToInstance(Client, newClient);
   }
@@ -40,6 +38,7 @@ export class ClientsPrismaRepository implements ClientsRepository {
     const client = await this.prisma.client.findUnique({
       where: { email },
     });
+
     return client;
   }
 

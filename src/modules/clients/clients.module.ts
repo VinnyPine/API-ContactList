@@ -3,7 +3,7 @@ import { ClientsService } from './clients.service';
 import { ClientsController } from './clients.controller';
 import { PrismaService } from 'src/database/prisma.service';
 import { ClientsRepository } from './repositories/clients.repository';
-import { ClientsPrismaRepository } from './repositories/prisma/client-prisma.repository';
+import { ClientsPrismaRepository } from './repositories/prisma/clients-prisma.repository';
 
 @Module({
   controllers: [ClientsController],

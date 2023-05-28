@@ -9,7 +9,7 @@ import {
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { LoginDto } from './dto/login.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { ClientsService } from '../clients/clients.service';
 
@@ -28,6 +28,7 @@ export class AuthController {
   }
 
   @Get('token')
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   async verifyToken(@Request() req) {
     return this.clientService.findOne(req.user.id, req);

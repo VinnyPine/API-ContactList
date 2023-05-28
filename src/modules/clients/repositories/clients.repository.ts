@@ -5,9 +5,7 @@ import { Client } from '../entities/client.entity';
 export abstract class ClientsRepository {
   abstract create(data: CreateClientDto): Promise<Client> | Client;
   abstract findAll(): Promise<Client[]> | Client[];
-  abstract findOne(
-    id: string,
-  ): Promise<Client | undefined> | Client | undefined;
+  abstract findOne(id: string): Promise<Client | null> | Client | null;
   abstract findByEmail(
     email: string,
   ): Promise<Client | undefined> | Client | undefined;

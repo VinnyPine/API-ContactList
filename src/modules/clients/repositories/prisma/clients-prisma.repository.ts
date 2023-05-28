@@ -26,7 +26,7 @@ export class ClientsPrismaRepository implements ClientsRepository {
     return plainToInstance(Client, clients);
   }
 
-  async findOne(id: string): Promise<Client | undefined> {
+  async findOne(id: string): Promise<Client | null> {
     const client = await this.prisma.client.findUnique({
       where: { id },
     });

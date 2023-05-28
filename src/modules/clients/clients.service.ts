@@ -31,11 +31,11 @@ export class ClientsService {
     return this.clientRepository.findAll();
   }
 
-  findOne(id: string, req: any) {
-    if (!req.user.admin) {
+  async findOne(id: string, req: any) {
+    if (!req.user.admin && req.user.id !== id) {
       throw new UnauthorizedException('user not authorized');
     }
-    const findClient = this.clientRepository.findOne(id);
+    const findClient = await this.clientRepository.findOne(id);
     if (!findClient) {
       throw new NotFoundException('user not found');
     }
